@@ -25,7 +25,7 @@ keypoints:
 Now that we know a few basic commands,
 we can finally look at the shell's most powerful feature:
 the ease with which it lets us combine existing programs in new ways.
-We'll start with a directory called `molecules`
+We'll start with the directory called `data-shell/molecules`
 that contains six files describing some simple organic molecules.
 The `.pdb` extension indicates that these files are in Protein Data Bank format,
 a simple text format that specifies the type and position of each atom in the molecule.
@@ -97,7 +97,7 @@ $ wc -l *.pdb
 ~~~
 {: .output}
 
-The `-c` and `-w` options can also be used with the `wc` command, to show 
+The `-m` and `-w` options can also be used with the `wc` command, to show 
 only the number of characters or the number of words in the files.
 
 > ## Why Isn't It Doing Anything?
@@ -419,7 +419,7 @@ the calculation is 'head of sort of line count of `*.pdb`'.
 
 The redirection and pipes used in the last few commands are illustrated below:
 
-![Redirects and Pipes](../fig/redirects-and-pipes.png)
+![Redirects and Pipes](../fig/redirects-and-pipes.svg)
 
 > ## Piping Commands Together
 >
@@ -577,7 +577,7 @@ so that you and other people can put those programs into pipes to multiply their
 
 Nelle has run her samples through the assay machines
 and created 17 files in the `north-pacific-gyre/2012-07-03` directory described earlier.
-As a quick sanity check, starting from her home directory, Nelle types:
+As a quick check, starting from her home directory, Nelle types:
 
 ~~~
 $ cd north-pacific-gyre/2012-07-03
@@ -677,25 +677,29 @@ so this matches all the valid data files she has.
 >
 > 1.  Can you match the same set of files with basic wildcard expressions
 >     that do not use the `[]` syntax? *Hint*: You may need more than one
->     expression.
+>     command, or two arguments to the `ls` command.
 >
-> 2.  The expression that you found and the expression from the lesson match the
+> 2.  If you used two commands, the files in your output will match the
 >     same set of files in this example. What is the small difference between the
 >     outputs?
 >
-> 3.  Under what circumstances would your new expression produce an error message
->     where the original one would not?
+> 3.  If you used two commands, under what circumstances would your new
+>     expression produce an error message where the original one would not?
 >
 > > ## Solution
-> > 1. A solution using two wildcard expressions:
+> > 1. A solution using two wildcard commands:
 > >     ~~~
 > >     $ ls *A.txt
 > >     $ ls *B.txt
 > >     ~~~
+> >     A solution using one command but with two arguments:
+> >     ~~~
+> >     $ ls *A.txt *B.txt
+> >     ~~~
 > >     {: .language-bash}
-> > 2. The output from the new commands is separated because there are two commands.
+> > 2. The output from the two new commands is separated because there are two commands.
 > > 3. When there are no files ending in `A.txt`, or there are no files ending in
-> > `B.txt`.
+> > `B.txt`, then one of the two commands will fail.
 > {: .solution}
 {: .challenge}
 

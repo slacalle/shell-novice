@@ -10,6 +10,7 @@ objectives:
 - "Explain the similarities and differences between a file and a directory."
 - "Translate an absolute path into a relative path and vice versa."
 - "Construct absolute and relative paths that identify specific files and directories."
+- "Use options and arguments to change the behaviour of a shell command"
 - "Demonstrate the use of tab completion, and explain its advantages."
 keypoints:
 - "The file system is responsible for managing information on the disk."
@@ -119,8 +120,7 @@ Typically, when you open a new command prompt you will be in
 your home directory to start.
 
 Now let's learn the command that will let us see the contents of our
-own filesystem.  We can see what's in our home directory by running `ls`,
-which stands for 'listing':
+own filesystem.  We can see what's in our home directory by running `ls`:
 
 ~~~
 $ ls
@@ -160,6 +160,13 @@ Desktop/      Downloads/    Movies/       Pictures/
 ~~~
 {: .output}
 
+> ## Clearing your terminal
+>
+> If your screen gets too cluttered, you can clear your terminal using the
+> `clear` command. You can still access previous commands using <kbd>↑</kbd>
+> and <kbd>↓</kbd> to move line-by-line, or by scrolling in your terminal.
+{: .callout}
+
 Here,
 we can see that our home directory contains only **sub-directories**.
 Any names in your output that don't have a classification symbol,
@@ -190,11 +197,11 @@ between `ls` and `-F` the shell will look for a command called `ls-F`, which
 doesn't exist. Also, capitalization can be important. For example, `ls -s` will display the size of files and directories alongside the names, while `ls -S` will sort the files and directories by size, as shown below:
 
 ~~~
-$ ls -s data-shell/data
+$ ls -s Desktop/data-shell/data
 total 116
  4 amino-acids.txt   4 animals.txt   4 morse.txt  12 planets.txt  76 sunspot.txt
  4 animal-counts     4 elements      4 pdb         4 salmon.txt
-$ ls -S data-shell/data
+$ ls -S Desktop/data-shell/data
 sunspot.txt  animal-counts  pdb        amino-acids.txt  salmon.txt
 planets.txt  elements       morse.txt  animals.txt
 ~~~
@@ -206,6 +213,10 @@ An example of the output you might get from the above command is given below:
 
 ~~~
 $ ls -F /
+~~~
+{: .language-bash}
+
+~~~
 Applications/         System/
 Library/              Users/
 Network/              Volumes/
@@ -221,18 +232,18 @@ to use a command and what options it accepts:
     ~~~
     $ ls --help
     ~~~
-    {: .bash}
+    {: .language-bash}
 
 2. We can read its manual with `man`, such as:
     ~~~
     $ man ls
     ~~~
-    {: .bash}
+    {: .language-bash}
 
 **Depending on your environment you might find that only one of these works
-(either `man` or `--help`).**
-We'll describe both ways below.
+(either `man` or `--help`, eg. `man` works for macOS and `--help` typically works for Git Bash).**
 
+We'll describe both ways below.
 
 #### The `--help` option
 
@@ -387,7 +398,7 @@ The other way to learn about `ls` is to type
 ~~~
 $ man ls
 ~~~
-{: .bash}
+{: .language-bash}
 
 This will turn your terminal into a page with a description
 of the `ls` command and its options and, if you're lucky, some examples
@@ -435,12 +446,12 @@ To **quit** the `man` pages, press <kbd>Q</kbd>.
 
 > ## Listing in Reverse Chronological Order
 >
-> By default `ls` lists the contents of a directory in alphabetical 
-> order by name. The command `ls -t` lists items by time of last 
-> change instead of alphabetically. The command `ls -r` lists the 
+> By default `ls` lists the contents of a directory in alphabetical
+> order by name. The command `ls -t` lists items by time of last
+> change instead of alphabetically. The command `ls -r` lists the
 > contents of a directory in reverse order.
-> Which file is displayed last when you combine the `-t` and `-r` flags? 
-> Hint: You may need to use the `-l` flag to see the 
+> Which file is displayed last when you combine the `-t` and `-r` flags?
+> Hint: You may need to use the `-l` flag to see the
 > last changed dates.
 >
 > > ## Solution
@@ -450,8 +461,9 @@ To **quit** the `man` pages, press <kbd>Q</kbd>.
 > {: .solution}
 {: .challenge}
 
+### Exploring Other Directories
 
-We can also use `ls` to see the contents of a different directory.  Let's take a
+Not only can we use `ls` on the current working directory, but we can use it to list the contents of a different directory.  Let's take a
 look at our `Desktop` directory by running `ls -F Desktop`,
 i.e.,
 the command `ls` with the `-F` **option** and the **argument**  `Desktop`.
@@ -468,10 +480,12 @@ data-shell/
 ~~~
 {: .output}
 
-Your output should be a list of all the files and sub-directories on your
-Desktop, including the `data-shell` directory you downloaded at
-the [setup for this lesson]({{ page.root }}{% link setup.md %}).  Take a look at your Desktop to confirm that
-your output is accurate.
+Your output should be a list of all the files and sub-directories in your
+Desktop directory, including the `data-shell` directory you downloaded at
+the [setup for this lesson]({{ page.root }}{% link setup.md %}).
+On many systems,
+the command line Desktop directory is the same as your GUI Desktop.
+Take a look at your Desktop to confirm that your output is accurate.
 
 As you may now see, using a bash shell is strongly dependent on the idea that
 your files are organized in a hierarchical file system.
@@ -480,7 +494,7 @@ it's possible to put hundreds of files in our home directory,
 just as it's possible to pile hundreds of printed papers on our desk,
 but it's a self-defeating strategy.
 
-Now that we know the `data-shell` directory is located on our Desktop, we
+Now that we know the `data-shell` directory is located in our Desktop directory, we
 can do two things.
 
 First, we can look at its contents, using the same strategy as before, passing
@@ -518,10 +532,10 @@ $ cd data
 ~~~
 {: .language-bash}
 
-These commands will move us from our home directory onto our Desktop, then into
+These commands will move us from our home directory into our Desktop directory, then into
 the `data-shell` directory, then into the `data` directory.  You will notice that `cd` doesn't print anything.  This is normal.  Many shell commands will not output anything to the screen when successfully executed.  But if we run `pwd` after it, we can see that we are now
 in `/Users/nelle/Desktop/data-shell/data`.
-If we run `ls` without arguments now,
+If we run `ls -F` without arguments now,
 it lists the contents of `/Users/nelle/Desktop/data-shell/data`,
 because that's where we now are:
 
@@ -592,7 +606,7 @@ $ pwd
 {: .output}
 
 The special directory `..` doesn't usually show up when we run `ls`.  If we want
-to display it, we can give `ls` the `-a` option:
+to display it, we can add the `-a` option to `ls -F`:
 
 ~~~
 $ ls -F -a

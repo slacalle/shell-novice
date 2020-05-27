@@ -240,7 +240,8 @@ which means,
 'All of the command-line arguments to the shell script'.
 We also should put `$@` inside double-quotes
 to handle the case of arguments containing spaces
-(`"$@"` is equivalent to `"$1"` `"$2"` ...)
+(`"$@"` is special syntax and is equivalent to `"$1"` `"$2"` ...).
+
 Here's an example:
 
 ~~~
@@ -510,6 +511,17 @@ Of course, this introduces another tradeoff between flexibility and complexity.
 > > wc -l $1/*.$2 | sort -n | tail -n 2 | head -n 1
 > > ```
 > > {: .source}
+> >
+> > The first part of the pipeline, `wc -l $1/*.$2 | sort -n`, counts
+> > the lines in each file and sorts them numerically (largest last). When
+> > there's more than one file, `wc` also outputs a final summary line,
+> > giving the total number of lines across _all_ files.  We use `tail
+> > -n 2 | head -n 1` to throw away this last line.
+> >
+> > With `wc -l $1/*.$2 | sort -n | tail -n 1` we'll see the final summary
+> > line: we can build our pipeline up in pieces to be sure we understand
+> > the output.
+> >
 > {: .solution}
 {: .challenge}
 

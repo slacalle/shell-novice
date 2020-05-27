@@ -18,7 +18,7 @@ keypoints:
 - "Do not use spaces, quotes, or wildcard characters such as '*' or '?' in filenames, as it complicates variable expansion."
 - "Give files consistent names that are easy to match with wildcard patterns to make it easy to select them for looping."
 - "Use the up-arrow key to scroll up through previous commands to edit and repeat them."
-- "Use `Ctrl-R` to search through the previously entered commands."
+- "Use <kbd>Ctrl</kbd>+<kbd>R</kbd> to search through the previously entered commands."
 - "Use `history` to display recent commands, and `!number` to repeat a command by number."
 ---
 
@@ -101,9 +101,9 @@ The interpreter runs the command `head` on `basilisk.dat`
 and pipes the first two lines to the `tail` command,
 which then prints the second line of `basilisk.dat`.
 For the second iteration, `$filename` becomes
-`minotaur.dat`. This time, the shell runs `head` on `monotaur.dat`
+`minotaur.dat`. This time, the shell runs `head` on `minotaur.dat`
 and pipes the first two lines to the `tail` command,
-which then prints the second line of `monotaur.dat`.
+which then prints the second line of `minotaur.dat`.
 For the third iteration, `$filename` becomes
 `unicorn.dat`, so the shell runs the `head` command on that file,
 and `tail` on the output of that.
@@ -562,7 +562,7 @@ Typing in commands over and over again is becoming tedious,
 though,
 and Nelle is worried about making mistakes,
 so instead of re-entering her loop,
-she presses the up arrow.
+she presses <kbd>↑</kbd>.
 In response,
 the shell redisplays the whole loop on one line
 (using semi-colons to separate the pieces):
@@ -585,8 +585,8 @@ the shell runs the modified command.
 However, nothing appears to happen --- there is no output.
 After a moment, Nelle realizes that since her script doesn't print anything to the screen any longer,
 she has no idea whether it is running, much less how quickly.
-She kills the running command by typing `Ctrl-C`,
-uses up-arrow to repeat the command,
+She kills the running command by typing <kbd>Ctrl</kbd>+<kbd>C</kbd>,
+uses <kbd>↑</kbd> to repeat the command,
 and edits it to read:
 
 ~~~
@@ -596,8 +596,8 @@ $ for datafile in NENE*[AB].txt; do echo $datafile; bash goostats $datafile stat
 
 > ## Beginning and End
 >
-> We can move to the beginning of a line in the shell by typing `Ctrl-a`
-> and to the end using `Ctrl-e`.
+> We can move to the beginning of a line in the shell by typing <kbd>Ctrl</kbd>+<kbd>A</kbd>
+> and to the end using <kbd>Ctrl</kbd>+<kbd>E</kbd>.
 {: .callout}
 
 When she runs her program now,
@@ -650,16 +650,18 @@ so she decides to get some coffee and catch up on her reading.
 >
 > There are a number of other shortcut commands for getting at the history.
 >
-> - `Ctrl-R` enters a history search mode 'reverse-i-search' and finds the
+> - <kbd>Ctrl</kbd>+<kbd>R</kbd> enters a history search mode 'reverse-i-search' and finds the
 > most recent command in your history that matches the text you enter next.
-> Press `Ctrl-R` one or more additional times to search for earlier matches.
+> Press <kbd>Ctrl</kbd>+<kbd>R</kbd> one or more additional times to search for earlier matches.
+> You can then use the left and right arrow keys to choose that line and edit
+> it then hit <kbd>Return</kbd> to run the command.
 > - `!!` retrieves the immediately preceding command
-> (you may or may not find this more convenient than using the up-arrow)
+> (you may or may not find this more convenient than using <kbd>↑</kbd>)
 > - `!$` retrieves the last word of the last command.
 > That's useful more often than you might expect: after
 > `bash goostats NENE01729B.txt stats-NENE01729B.txt`, you can type
 > `less !$` to look at the file `stats-NENE01729B.txt`, which is
-> quicker than doing up-arrow and editing the command-line.
+> quicker than doing <kbd>↑</kbd> and editing the command-line.
 {: .callout}
 
 > ## Doing a Dry Run
@@ -672,9 +674,9 @@ so she decides to get some coffee and catch up on her reading.
 > without actually running those commands:
 >
 > ~~~
-> $ for file in *.pdb
+> $ for datafile in *.pdb
 > > do
-> >   analyze $file > analyzed-$file
+> >   cat $datafile >> all.pdb
 > > done
 > ~~~
 > {: .language-bash}
@@ -684,18 +686,18 @@ so she decides to get some coffee and catch up on her reading.
 >
 > ~~~
 > # Version 1
-> $ for file in *.pdb
+> $ for datafile in *.pdb
 > > do
-> >   echo analyze $file > analyzed-$file
+> >   echo cat $datafile >> all.pdb
 > > done
 > ~~~
 > {: .language-bash}
 >
 > ~~~
 > # Version 2
-> $ for file in *.pdb
+> $ for datafile in *.pdb
 > > do
-> >   echo "analyze $file > analyzed-$file"
+> >   echo "cat $datafile >> all.pdb"
 > > done
 > ~~~
 > {: .language-bash}
@@ -705,18 +707,18 @@ so she decides to get some coffee and catch up on her reading.
 > > This prints to screen everything enclosed in the quote marks, expanding the
 > > loop variable name because we have prefixed it with a dollar sign.
 > >
-> > The first version redirects the output from the command `echo analyze $file` to
-> > a file, `analyzed-$file`. A series of files is generated: `analyzed-cubane.pdb`,
-> > `analyzed-ethane.pdb` etc.
+> > The first version appends the output from the command `echo cat $datafile` 
+> > to the file, `all.pdb`. This file will just contain the list; 
+> > `cat cubane.pdb`, `cat ethane.pdb`, `cat methane.pdb` etc.
 > >
 > > Try both versions for yourself to see the output! Be sure to open the
-> > `analyzed-*.pdb` files to view their contents.
+> > `all.pdb` file to view its contents.
 > {: .solution}
 {: .challenge}
 
 > ## Nested Loops
 >
-> Suppose we want to set up up a directory structure to organize
+> Suppose we want to set up a directory structure to organize
 > some experiments measuring reaction rate constants with different compounds
 > *and* different temperatures.  What would be the
 > result of the following code:
